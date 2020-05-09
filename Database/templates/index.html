@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+          integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+     <div class="container">
+          <br />
+          <br />
+          <h2 align="center">What ingredients do you have?</h2>
+          <div class="form-group">
+               <form name="add_name" id="add_name" method="POST" action="" autocomplete="off">
+                    <div class="table-responsive">
+                         <table class="table table-bordered" id="dynamic_field">
+                              <tr id="row1">
+                                   <td><input id="input1" type="text" name="name[]" placeholder="Ingredient #1"
+                                             class="form-control name_list" /></td>
+                                   <td><button type="button" name="add" id="add" class="btn btn-success">Add
+                                             More</button></td>
+                              </tr>
+                         </table>
+                         <input type="submit" name="submit" id="submit" class="btn btn-info" value="Submit" />
+                    </div>
+               </form>
+          </div>
+     </div>
+
+
+     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+          integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+          crossorigin="anonymous"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+          integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+          crossorigin="anonymous"></script>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+          integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+          crossorigin="anonymous"></script>
+</body>
+
+</html>
+<script>
+     $(document).ready(function () {
+          var i = 1;
+          $('#add').click(function () {
+               i++;
+               //console.log("i= " + i);
+               $('#dynamic_field').append('<tr id="row' + i + '"><td><input id="input' + i + '" type="text" name="name[]" placeholder="Ingredient #' + i + '" class="form-control name_list" /></td><td id="td' + i + '"><button type="button" name="remove" id="button' + i + '" class="btn btn-danger btn_remove">X</button></td></tr>');
+               if (i >= 3) {
+                    var previous_button = $("#button" + (i - 1));
+                    previous_button.remove();
+               }
+          });
+          $(document).on('click', '.btn_remove', function () {
+               if (i >= 2) {
+                    var previous_button_td = $("#td" + (i - 1));
+                    previous_button_td.append('<button type="button" name="remove" id="button' + (i - 1) + '" class="btn btn-danger btn_remove">X</button>');
+                    var self = $('#row' + i);
+                    self.remove();
+                    i--;
+               } else {
+                    var button_id = $(this).attr("id");
+                    $('#row' + button_id + '').remove();
+                    i--;
+               }
+
+          });
+          // $('#submit').click(function () {
+          //      var inputs = document.getElementsByName('name[]'), names = [].map.call(inputs, function (input) {
+          //           return input.value;
+          //      });
+
+          //      for (var j = 0; j < i; j++) {
+          //           console.log(names[j]);
+          //      }
+
+          // });
+     });
+</script>
+
+
+<!--$.ajax({
+                url:"name.php",
+                method:"POST",
+                data:$('#add_name').serialize(),
+                success:function(data)
+                {
+                     alert(data);
+                     $('#add_name')[0].reset();
+                }
+           });-->
