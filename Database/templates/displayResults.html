@@ -1,4 +1,12 @@
 <table border=1>
+    <tr>
+        <td>RecipeName</td>
+        <td>Description</td>
+        <td>Ingredients</td>
+        <td>amount</td>
+        <td>Measurement Unit</td>
+
+    </tr>
     {% for user in queryResults %}
     <tr>
         <td> {{user[0]}}</td>
@@ -6,11 +14,8 @@
         <td> {{user[2]}}</td>
         <td> {{user[3]}}</td>
         <td> {{user[4]}}</td>
-        <td> {{user[5]}}</td>
-        <td> {{user[6]}}</td>
-        <td> {{user[7]}}</td>
-        <td> {{user[8]}}</td>
+
     </tr>
     {% endfor %}
-    <p>current ID = {{counter}}</p>
+
 </table>
